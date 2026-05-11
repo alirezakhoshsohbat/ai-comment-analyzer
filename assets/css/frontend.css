@@ -1,0 +1,506 @@
+.aica-box {
+    border: 1px solid #dcdcdc;
+    padding: var(--aica-padding, 16px);
+    margin: 16px 0;
+    background: #fafafa;
+    border-radius: var(--aica-radius, 8px);
+    position: relative;
+    overflow: hidden;
+    direction: rtl;
+    text-align: right;
+    transition: all .25s ease;
+}
+
+.aica-box.aica-collapsed {
+    overflow: hidden;
+    transition: max-height .35s ease;
+}
+
+.aica-live-init .aica-build-item {
+    opacity: 0;
+    display: none;
+}
+
+.aica-live-init .aica-build-item.aica-queued {
+    opacity: 0;
+    display: none;
+}
+
+.aica-live-init .aica-build-item:not(.aica-queued) {
+    opacity: 1;
+    display: block;
+}
+
+.aica-queued {
+    opacity: 0;
+}
+
+.aica-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.aica-head-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--aica-accent, #4f46e5);
+    color: #fff;
+    font-weight: 700;
+}
+
+.aica-subtitle {
+    margin: 2px 0 0;
+    opacity: .8;
+    font-size: 13px;
+}
+
+.aica-typing {
+    position: relative;
+}
+
+.aica-typing::after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background: currentColor;
+    margin-right: 4px;
+    vertical-align: middle;
+    animation: aicaBlink .8s steps(1) infinite;
+}
+
+@keyframes aicaBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.aica-sentiments {
+    display: block;
+    margin: 10px 0;
+    text-align: right;
+}
+
+.aica-point-list {
+    margin: 8px 0 14px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
+.aica-point-list li {
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(15, 23, 42, .10);
+    color: var(--aica-point-text, #0f172a);
+}
+
+.aica-point-pos {
+    background: var(--aica-point-bg-pos, #dcfce7);
+}
+
+.aica-point-neg {
+    background: var(--aica-point-bg-neg, #fee2e2);
+}
+
+.aica-point-icon {
+    font-size: 12px;
+    line-height: 1;
+}
+
+.aica-point-text {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.aica-tag {
+    display: inline-block;
+    margin: 4px;
+    padding: 4px 8px;
+    background: #ececec;
+    border-radius: 14px;
+    font-size: 12px;
+}
+
+.aica-topics-panel {
+    margin: 24px 0 12px;
+    padding: var(--aica-topics-panel-padding, 18px 20px);
+    border-radius: var(--aica-topics-panel-border-radius, 18px);
+    background: var(--aica-topics-panel-bg, rgba(15, 23, 42, .04));
+    border: var(--aica-topics-panel-border-width, 1px) solid var(--aica-topics-panel-border-color, rgba(79, 70, 229, .18));
+    box-shadow: 0 10px 30px rgba(15, 23, 42, .05);
+}
+
+.aica-topics-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.aica-topics-head strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--aica-accent, #4f46e5);
+}
+
+.aica-topics-subtitle {
+    margin: 4px 0 0;
+    font-size: 13px;
+    opacity: .7;
+}
+
+.aica-topics-spark {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--aica-accent, #4f46e5) 60%, transparent), transparent 60%);
+    position: relative;
+}
+
+.aica-topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+}
+
+/* Pill styling via CSS variables */
+.aica-topic-pill {
+    width: 100%;
+    border: var(--aica-topic-pill-border-width) solid var(--aica-topic-pill-border-color);
+    border-radius: var(--aica-topic-pill-border-radius);
+    background: var(--aica-topic-pill-bg);
+    color: var(--aica-topic-pill-text);
+    padding: 10px 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    transition: transform .2s ease, box-shadow .2s ease;
+    cursor: pointer;
+}
+
+.aica-topic-pill:hover,
+.aica-topic-pill:hover,
+.aica-topic-pill:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .12);
+}
+
+/* Remove theme-based overrides; use dynamic CSS variables for pill styling */
+.aica-topic-pill {
+    border-color: var(--aica-topic-pill-border-color);
+    color: var(--aica-topic-pill-text);
+    background: var(--aica-topic-pill-bg);
+}
+
+.aica-topic-pill:hover,
+.aica-topic-pill:focus-visible {
+    background: var(--aica-accent);
+    color: #fff;
+}
+.aica-topic-pill:focus-visible {
+    outline: 2px solid var(--aica-accent, #4f46e5);
+    outline-offset: 2px;
+}
+
+.aica-topic-placeholder {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    width: 100%;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .6);
+    color: rgba(15, 23, 42, .65);
+}
+
+/* Topic card styling via CSS variables */
+.aica-topic-card {
+    background: var(--aica-topic-card-bg);
+    color: var(--aica-topic-card-text);
+    border: var(--aica-topic-card-border-width) solid var(--aica-topic-card-border-color);
+    border-radius: var(--aica-topic-card-border-radius);
+    padding: var(--aica-topic-card-padding);
+    text-align: center;
+    transition: transform .2s ease, box-shadow .2s ease;
+    cursor: pointer;
+}
+.aica-topic-card:hover,
+.aica-topic-card:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .12);
+}
+
+.aica-topic-summaries {
+    margin: 16px 0 14px;
+    padding: var(--aica-topic-summaries-padding, 14px 16px);
+    border-radius: var(--aica-topic-summaries-border-radius, 14px);
+    background: var(--aica-topic-summaries-bg, rgba(79, 70, 229, .08));
+    border: var(--aica-topic-summaries-border-width, 1px) solid var(--aica-topic-summaries-border-color, rgba(79, 70, 229, .2));
+}
+
+.aica-topic-summaries h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.aica-topic-summaries p {
+    margin: 6px 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.aica-faq-accordion {
+    margin: 22px 0 0;
+    border-radius: var(--aica-faq-border-radius, 18px);
+    padding: var(--aica-faq-padding, 22px 20px);
+    background: var(--aica-faq-bg, transparent);
+    border: var(--aica-faq-border-width, 0px) solid var(--aica-faq-border-color, transparent);
+    color: inherit;
+}
+
+.aica-faq-accordion h4 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 17px;
+}
+
+.aica-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aica-accordion-trigger {
+    width: 100%;
+    border: 1px solid var(--aica-accent);
+    background: transparent;
+    color: var(--aica-accent);
+    border-radius: var(--aica-faq-border-radius, 14px);
+    padding: var(--aica-faq-padding, 14px 16px);
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease;
+}
+
+.aica-accordion-trigger:hover,
+.aica-accordion-trigger:hover,
+.aica-accordion-trigger[aria-expanded="true"] {
+    border-color: var(--aica-accent);
+    background: color-mix(in srgb, var(--aica-accent) 15%, transparent);
+}
+.aica-accordion-icon {
+    font-size: 18px;
+    line-height: 1;
+    transition: transform .3s ease;
+}
+
+.aica-accordion-trigger[aria-expanded="true"] .aica-accordion-icon {
+    transform: rotate(45deg);
+}
+
+.aica-accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease;
+    padding: var(--aica-faq-padding, 0 16px);
+    background: var(--aica-faq-bg, color-mix(in srgb, var(--aica-accent) 5%, transparent));
+    border-left: var(--aica-faq-border-width, 2px) solid var(--aica-faq-border-color, var(--aica-accent));
+    border-bottom-left-radius: var(--aica-faq-border-radius, 18px);
+    border-bottom-right-radius: var(--aica-faq-border-radius, 18px);
+}
+
+.aica-accordion-panel.is-open {
+    padding-top: 10px;
+}
+
+.aica-accordion-panel p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: inherit;
+}
+
+.aica-filter a {
+    text-decoration: none;
+}
+
+/* Topic cards grid and styling */
+.aica-topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+    padding: var(--aica-topics-panel-padding, 0);
+}
+
+.aica-topic-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--aica-topic-card-padding, 12px);
+    border: var(--aica-topic-card-border-width, 1px) solid var(--aica-topic-card-border-color);
+    border-radius: var(--aica-topic-card-border-radius, 12px);
+    background: var(--aica-topic-card-bg, #fff);
+    color: var(--aica-topic-card-text, #0f172a);
+    text-align: center;
+    font-size: 14px;
+}
+
+.aica-topic-card.aica-placeholder {
+    opacity: 0.6;
+}
+
+.aica-theme-modern-dark {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #f8fafc;
+    border-color: rgba(255, 255, 255, .08);
+}
+
+.aica-theme-modern-light {
+    background: linear-gradient(135deg, #f8fbff, #eef2ff);
+    color: #0f172a;
+    border-color: #dbeafe;
+}
+
+.aica-theme-minimal {
+    background: #fff;
+    color: #0f172a;
+    border-color: #e5e7eb;
+}
+
+.aica-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--aica-accent, #4f46e5) 28%, transparent), transparent 45%);
+    pointer-events: none;
+}
+
+.aica-theme-neon {
+    background: linear-gradient(140deg, #09090b, #1a1a2e);
+    color: #e2ffe9;
+    border-color: rgba(16, 185, 129, .4);
+    box-shadow: 0 0 24px rgba(16, 185, 129, .25);
+}
+
+.aica-theme-aurora {
+    background: linear-gradient(140deg, #e0f2fe, #ede9fe, #ecfeff);
+    color: #0f172a;
+    border-color: #bae6fd;
+}
+
+.aica-theme-midnight-pro {
+    background: radial-gradient(circle at 20% 20%, #1e3a8a, #020617 62%);
+    color: #e2e8f0;
+    border-color: rgba(148, 163, 184, .35);
+    box-shadow: 0 20px 45px rgba(2, 6, 23, .45);
+}
+
+.aica-theme-sunset-pro {
+    background: linear-gradient(140deg, #7c2d12, #be123c, #7c3aed);
+    color: #fff7ed;
+    border-color: rgba(251, 146, 60, .35);
+    box-shadow: 0 20px 44px rgba(136, 19, 55, .34);
+}
+
+.aica-theme-frost-pro {
+    background: linear-gradient(145deg, #ecfeff, #dbeafe, #ede9fe);
+    color: #0f172a;
+    border-color: #bfdbfe;
+    box-shadow: 0 16px 38px rgba(59, 130, 246, .15);
+}
+
+.aica-toggle-btn {
+    border: 0;
+    padding: 11px 17px;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 6px 0 10px;
+    transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, .25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: .1px;
+}
+
+.aica-btn-icon {
+    display: inline-flex;
+    margin-left: 8px;
+    font-size: 15px;
+    line-height: 1;
+}
+
+.aica-box,
+.aica-toggle-btn {
+    direction: rtl;
+}
+
+.aica-toggle-btn {
+    margin: 6px 0 10px;
+}
+
+.aica-toggle-btn:hover {
+    transform: translateY(-1px);
+    opacity: .95;
+}
+
+.aica-toggle-btn.is-disabled,
+.aica-toggle-btn:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.aica-btn-glass {
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, .25);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--aica-accent, #4f46e5) 55%, white), color-mix(in srgb, var(--aica-accent, #4f46e5) 70%, black));
+    box-shadow: 0 10px 26px rgba(79, 70, 229, .35);
+}
+
+.aica-btn-outline {
+    background: transparent !important;
+    border: 2px solid var(--aica-accent, #4f46e5);
+    color: var(--aica-accent, #4f46e5) !important;
+    box-shadow: none;
+}
+
+.aica-btn-solid {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--aica-accent, #4f46e5) 80%, white), color-mix(in srgb, var(--aica-accent, #4f46e5) 72%, black));
+    box-shadow: 0 10px 26px rgba(37, 99, 235, .35);
+}
+
+.aica-toggle-wrap {
+    width: 100%;
+    display: flex;
+}
+
+.aica-toggle-wrap.aica-align-right { justify-content: flex-end; }
+.aica-toggle-wrap.aica-align-left { justify-content: flex-start; }
+.aica-toggle-wrap.aica-align-center { justify-content: center; }
+
+.aica-toggle-target.is-hidden {
+    display: none;
+}
